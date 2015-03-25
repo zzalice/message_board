@@ -21,8 +21,8 @@ if(isset($_POST['content'])) {
 	{
 		$post_user = $user;
 	}
-
-	$messageModel->saveData($post_user, date("Y-m-d h:i:s", time()), $_POST['content']);	
+	$date_time=date("Y-m-d h:i:s", time();
+	$messageModel->saveData($post_user, $date_time), $_POST['content']);	
 }
 
 //print
@@ -56,6 +56,7 @@ Content: <br>
 <input type="submit" value="submit" id="submit"><br>
 </form>
 
+<!--print the messages-->
 <div id="messages">
 <?php foreach($messages as $m){ ?>
 	<div class="message">
@@ -68,4 +69,4 @@ Content: <br>
 </div>
 
 <script src="lib/jquery-2.1.3.min.js"></script>  <!--this file is jquery's  main program-->
-<script src="modle/message.js"></script>
+<script src="js/message.js"></script>
