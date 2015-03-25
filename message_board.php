@@ -21,8 +21,15 @@ if(isset($_POST['content'])) {
 	{
 		$post_user = $user;
 	}
-	$date_time=date("Y-m-d h:i:s", time();
-	$messageModel->saveData($post_user, $date_time), $_POST['content']);	
+	$date_time=date("Y-m-d h:i:s", time());
+
+	//json
+	$newMessage = array(
+		"Name:" => $post_user,
+		"Time:" => $date_time,
+		"Content:" => $_POST['content']);
+
+	$messageModel->saveData($post_user, $date_time, $_POST['content']);	
 }
 
 //print
