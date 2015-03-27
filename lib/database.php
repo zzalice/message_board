@@ -9,7 +9,7 @@ class DB {
 		$password = "123";
 
 		// connect
-		$this->database = mysql_connect($dbhost, $accout, $password);
+		@$this->database = mysql_connect($dbhost, $accout, $password);
 		if(!$this->database){
 			die('DB connect fail'.mysql_error());
 		}

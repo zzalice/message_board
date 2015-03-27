@@ -1,8 +1,8 @@
 <?php
 //Declare
-session_start();
 include_once('model/message.php');
 
+session_start();
 $user = 'guest';
 if(isset($_SESSION['name'])) {
 $user = $_SESSION['name'];
@@ -10,32 +10,12 @@ $user = $_SESSION['name'];
 
 $messageModel = new Message_Model();
 
-//check save data
-if(isset($_POST['content'])) {
-	$post_user = 'guest';	
-	if($user == 'guest') {
-		if(isset($_POST['name']))	{
-			$post_user = $_POST['name'];
-		}
-	} else
-	{
-		$post_user = $user;
-	}
-	$date_time=date("Y-m-d h:i:s", time());
-
-	//json
-	$newMessage = array(
-		"Name:" => $post_user,
-		"Time:" => $date_time,
-		"Content:" => $_POST['content']);
-
-	$messageModel->saveData($post_user, $date_time, $_POST['content']);	
-}
-
 //print
 $messages = $messageModel->loadData();
 ?>
 
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <?php
 //login/logout href
 if($user == 'guest') {
@@ -45,22 +25,23 @@ if($user == 'guest') {
 	echo '<a href="logout.php">logout</a>'; 
 }
 ?><br>
-
-
-<form action="" method="POST"><!--action空白，會使function回傳到原檔案-->
-<!--user and content form.-->
-Name:<br>
-<?php
-if($user == 'guest') {
-	echo '<input type="text" name="name">';
-}else
-{ 
-	echo $user; 
-}
-?><br>
-Content: <br>
-<input type="text" name="content"><br>
-<input type="submit" value="submit" id="submit"><br>
+<form id="newForm" action="creat_message.php" method="POST">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Name:</label>
+         <?php
+		if($user == 'guest') {
+			echo '<input type="text" class="form-control" name="name" placeholder="name">';
+		}else{ 
+			echo $user; 
+		}
+	?>
+    
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Content: </label>
+    <input type="text" class="form-control" name="content" placeholder="content">
+  </div>
+  <button  class="btn btn-default" id="submit">Submit</button>
 </form>
 
 <!--print the messages-->
@@ -76,4 +57,5 @@ Content: <br>
 </div>
 
 <script src="lib/jquery-2.1.3.min.js"></script>  <!--this file is jquery's  main program-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="js/message.js"></script>
