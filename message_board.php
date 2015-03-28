@@ -1,6 +1,6 @@
 <?php
-//Declare
 include_once('model/message.php');
+$messageModel = new Message_Model();
 
 session_start();
 $user = 'guest';
@@ -8,16 +8,14 @@ if(isset($_SESSION['name'])) {
 $user = $_SESSION['name'];
 }
 
-$messageModel = new Message_Model();
-
 //print
 $messages = $messageModel->loadData();
 ?>
 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<!--login/logout href-->
 <?php
-//login/logout href
 if($user == 'guest') {
 	echo '<a href="login.php">login</a>';
 }else
@@ -25,6 +23,8 @@ if($user == 'guest') {
 	echo '<a href="logout.php">logout</a>'; 
 }
 ?><br>
+
+<!--form-->
 <form id="newForm" action="creat_message.php" method="POST">
   <div class="form-group">
     <label for="exampleInputEmail1">Name:</label>
@@ -57,5 +57,5 @@ if($user == 'guest') {
 </div>
 
 <script src="lib/jquery-2.1.3.min.js"></script>  <!--this file is jquery's  main program-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="js/message.js"></script>

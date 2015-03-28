@@ -1,21 +1,20 @@
-var test;
-$(function() {	//jquery
+//jquery
+$(function() {	
 
-  $("#newForm").submit(function(e) {  //once id:submit clicked, do ~~      //#: put html id name behind
+  $("#newForm").submit(function(e) {  
    	e.preventDefault();
 	$.ajax({	//ajax
-		url:"creat_message.php", 
+		url:"create_message.php", 
 		type: "POST",
-		data: $("#newForm").serialize(),   //inside {} is jquery.  val:   //name: is the thing that will be saved in POST
-		//how to print time?
+		data: $("#newForm").serialize(), //is saved into a string
 
-		//is it writen like this?
 		success: function(msg) {	//"msg" is all the string ajax return
-		console.log(msg); 	//js, save data
-		msg = $.parseJSON(msg);
-		test = msg;
-		console.log(msg); 	//js, save data
-		console.log(msg.Time);
+		msg = $.parseJSON(msg);		//change msg from string to object
+		$("#messages").append(
+			"<div><h3>Name:"+msg.Name+"</h3>"+
+			  	  "<h3>Time:"+msg.Time+"</h3>"+
+				  "<h5>Content:"+msg.Content+"</h5>"+
+			"</div><hr>");
      		 }
 	});
      });	
