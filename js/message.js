@@ -9,6 +9,7 @@ $(function() {
 		data: $("#newForm").serialize(), //is saved into a string
 
 		success: function(msg) {	//"msg" is all the string ajax return
+		console.log(msg);
 		msg = $.parseJSON(msg);		//change msg from string to object
 		$("#messages").append(
 			"<div><h3>Name:"+msg.Name+"</h3>"+

@@ -18,21 +18,26 @@ class Message_Model extends DB {
 		parent::__construct();
 	}
 
+
 	function saveData($u, $t, $c){
-		$query = "INSERT INTO `all_messages`(`name`, `time`, `content`) VALUE('".$u."', '".$t."', '".$c."');";
-		mysql_query($query);
+		//sql injection
+		//prepare and bind
+		$stmt = $this->conn->prepare("INSERT INTO all_messages(name,time, content) VALUE(?,?,?)");
+		$stmt -> bind_param("sss",$u,$t,$c);
+		$stmt -> execute();
+		$stmt->close();
 	}
 
 	function loadData(){
 		$messages = array();
-		$result = mysql_query("SELECT * FROM `all_messages`;");
+		$result = mysqli_query($this->conn, "SELECT * FROM all_messages");
 		
-		while($row = mysql_fetch_array($result)) {
+		while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
 			$temp = new Message($row['name'], $row['time'], $row['content']);
 			array_push($messages, $temp);
 		}
 		return $messages;
-		
+		mysqli_free_result($result);
 	}
 }
 
