@@ -28,7 +28,7 @@ if(isset($_POST['name']) and isset($_POST['password']))
 <!--log in form-->
 <form action="" method="POST">
 <h1>Log in</h1>
-<lable for="name">Name:</lable><input type="text" name="name"><br>
+<!--><--><lable for="name">Name:</lable><input type="text" name="name"><br>
 password:<input type="password" name="password" > <br>
 <input type="submit" name="button" >
 <a href="assign.php">申請帳號</a>
